@@ -42,6 +42,13 @@ func (app *application) validationError(w http.ResponseWriter, errs *models.Vali
 	})
 }
 
+func (app *application) duplicatedEmail(w http.ResponseWriter) {
+	handleError(app, w, http.StatusBadRequest, &ApiError{
+		Code:    "007",
+		Message: "user with this email already registered",
+	})
+}
+
 func handleError(app *application, w http.ResponseWriter, status int, e *ApiError) {
 	w.WriteHeader(status)
 	app.errorLog.Println(e.str())

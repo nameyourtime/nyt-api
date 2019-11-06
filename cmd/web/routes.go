@@ -11,5 +11,9 @@ func (app *application) routes() http.Handler {
 	router.Use(app.logRequest)
 	// Handlers
 	router.HandleFunc("/v0/hc", app.hc).Methods("GET")
+
+	// users
+	router.HandleFunc("/v0/users/register", app.registerUser).Methods("POST")
+
 	return router
 }
