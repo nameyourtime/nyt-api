@@ -11,7 +11,7 @@ type UserModel struct {
 }
 
 func (m *UserModel) Create(user *models.User) (string, error) {
-	stmt := `insert into user (name, email, password, status, refresh_token, refresh_token_exp) 
+	stmt := `insert into nameyourtime.user (name, email, password, status, refresh_token, refresh_token_exp) 
              values ($1, $2, $3, $4, $5, $6) returning id;`
 	var id string
 	err := m.DB.QueryRow(stmt, user.Name, user.Email, user.Password, user.Status,
@@ -29,7 +29,7 @@ func (m *UserModel) Create(user *models.User) (string, error) {
 
 func (m *UserModel) Get(userID string) (*models.User, error) {
 	stmt := `select id, name, email, password, status, created, refresh_token, refresh_token_exp 
-             from flcrd.user where id = $1;`
+             from nameyourtime.user where id = $1;`
 	d := &models.User{}
 	err := m.DB.QueryRow(stmt, userID).Scan(&d.ID, &d.Name, &d.Email, &d.Password, &d.Status, &d.Created,
 		&d.Token.RefreshToken, &d.Token.RefreshTokenExp)
@@ -46,7 +46,7 @@ func (m *UserModel) Get(userID string) (*models.User, error) {
 
 func (m *UserModel) GetByEmail(email string) (*models.User, error) {
 	stmt := `select id, name, email, password, status, created, refresh_token, refresh_token_exp 
-             from flcrd.user where email = $1;`
+             from nameyourtime.user where email = $1;`
 	d := &models.User{}
 	err := m.DB.QueryRow(stmt, email).Scan(&d.ID, &d.Name, &d.Email, &d.Password, &d.Status, &d.Created,
 		&d.Token.RefreshToken, &d.Token.RefreshTokenExp)

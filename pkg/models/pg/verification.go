@@ -11,7 +11,7 @@ type VerificationModel struct {
 }
 
 func (m *VerificationModel) Create(code models.VerificationCode) (string, error) {
-	stmt := `insert into verification_code (user_id, code, code_exp) values ($1, $2, $3) returning code;`
+	stmt := `insert into nameyourtime.verification_code (user_id, code, code_exp) values ($1, $2, $3) returning code;`
 	var c string
 	err := m.DB.QueryRow(stmt, code.UserID, code.Code, code.CodeExp).Scan(&c)
 	if err != nil {
