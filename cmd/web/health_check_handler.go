@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func (app *application) hc(w http.ResponseWriter, r *http.Request) {
+func (app *Application) hc(w http.ResponseWriter, r *http.Request) {
 	h := &models.Healthcheck{
 		Status:     "OK",
 		ServerTime: time.Now(),

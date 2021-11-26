@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func (app *application) routes() http.Handler {
+func (app *Application) routes() http.Handler {
 	router := mux.NewRouter()
 	// Middleware
 	router.Use(app.logRequest)
@@ -14,6 +14,8 @@ func (app *application) routes() http.Handler {
 
 	// users
 	router.HandleFunc("/v0/users/register", app.registerUser).Methods("POST")
+
+	router.Handle("/", NoSurf(app.Home)).Methods("GET")
 
 	return router
 }

@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func (app *application) registerUser(w http.ResponseWriter, r *http.Request) {
+func (app *Application) registerUser(w http.ResponseWriter, r *http.Request) {
 	user, valid := models.ParseUser(r)
 
 	if !valid {
@@ -56,7 +56,7 @@ func (app *application) registerUser(w http.ResponseWriter, r *http.Request) {
 	reply(w, http.StatusCreated, user)
 }
 
-func (app *application) sendConfirmation(userID, userName, email string) {
+func (app *Application) sendConfirmation(userID, userName, email string) {
 	code := generateVerificationCode(userID)
 	c, err := app.verification.Create(code)
 	if err != nil {

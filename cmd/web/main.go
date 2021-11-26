@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type application struct {
+type Application struct {
 	infoLog  *log.Logger
 	errorLog *log.Logger
 
@@ -48,7 +48,7 @@ func main() {
 		errorLog.Fatal(err)
 	}
 
-	app := &application{
+	app := &Application{
 		users:        &pg.UserModel{DB: db},
 		verification: &pg.VerificationModel{DB: db},
 		mailSender: &MailSender{

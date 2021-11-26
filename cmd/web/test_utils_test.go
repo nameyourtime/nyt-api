@@ -13,8 +13,8 @@ import (
 	"testing"
 )
 
-func newTestApp(t *testing.T) *application {
-	return &application{
+func newTestApp(t *testing.T) *Application {
+	return &Application{
 		users:        &mock.UserModel{},
 		verification: &mock.VerificationModel{},
 		mailSender:   &MockMailSender{},
@@ -53,7 +53,7 @@ func (ts *testServer) get(t *testing.T, urlPath, token string) (int, http.Header
 }
 
 func (ts *testServer) post(t *testing.T, urlPath, body string) (int, http.Header, []byte) {
-	rs, err := ts.Client().Post(ts.URL+urlPath, "application/json", strings.NewReader(body))
+	rs, err := ts.Client().Post(ts.URL+urlPath, "Application/json", strings.NewReader(body))
 	if err != nil {
 		t.Fatal(err)
 	}
